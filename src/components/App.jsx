@@ -26,7 +26,10 @@ function App() {
   }, []);*/
 
   useEffect(() => {
-    fetch("http://server-production-e885.up.railway.app/api/notes").then(
+    fetch("http://server-production-e885.up.railway.app/api/notes", {
+      method: 'GET',
+      credentials: 'include',  // Include credentials in the request
+    }).then(
       response => response.json()
     ).then(
       data =>
