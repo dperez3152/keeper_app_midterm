@@ -1,13 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
 import notes from "../notes";
+import axios from "axios";
 
 function App() {
   const [inputTitle, setInputTitle] = useState("");
   const [inputContent, setInputContent] = useState("");
   const [note, setNotes] = useState(notes);
+
+  useEffect(() => {
+    const fetchNotes = async () => {
+      try {
+        const response = await fetch("/api/notes");
+
+        const notes: Note[] =
+          await response.json();
+
+        setNotes(notes);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+    fetchNotes();
+  }, []);
 
   function handleTitleChange(event) {
     const newValue = event.target.value;
@@ -33,6 +51,32 @@ function App() {
     setInputTitle("");
     setInputContent("");
   }
+
+  /*const handleAddNote = async (
+    try {
+      const response = await fetch("/api/notes",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title,
+            content,
+          }),
+        }
+      );
+
+      const newNote = await response.json();
+
+      setNotes([newNote, ...notes]);
+      setTitle("");
+      setContent("");
+    } catch (e) {
+      console.log(e);
+    }
+  };*/
+
 
   const deleteNote = (id) => {
     setNotes((prevNotes) => {
