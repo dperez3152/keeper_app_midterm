@@ -9,7 +9,7 @@ function App() {
   const [inputContent, setInputContent] = useState("");
   const [note, setNotes] = useState(notes);
 
-  useEffect(() => {
+  /*useEffect(() => {
     const fetchNotes = async () => {
       try {
         const response = await fetch("/api/notes");
@@ -23,7 +23,16 @@ function App() {
     };
 
     fetchNotes();
-  }, []);
+  }, []);*/
+
+  useEffect(() => {
+    fetch("/api/notes").then(
+      response => response.json()
+    ).then(
+      data =>
+        setNotes(data)
+    )
+  }, [])
 
   function handleTitleChange(event) {
     const newValue = event.target.value;
