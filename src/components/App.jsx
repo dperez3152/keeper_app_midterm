@@ -7,7 +7,7 @@ import notes from "../notes";
 function App() {
   const [inputTitle, setInputTitle] = useState("");
   const [inputContent, setInputContent] = useState("");
-  const [note, setNotes] = useState(notes);
+  const [note, setNotes] = useState([]);
 
   /*useEffect(() => {
     const fetchNotes = async () => {
