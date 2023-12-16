@@ -14,10 +14,9 @@ function App() {
       try {
         const response = await fetch("/api/notes");
 
-        const notes: Note[] =
-          await response.json();
+        const notesReceived = await response.json();
 
-        setNotes(notes);
+        setNotes(notesReceived);
       } catch (e) {
         console.log(e);
       }
