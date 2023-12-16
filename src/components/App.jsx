@@ -26,7 +26,7 @@ function App() {
   }, []);*/
 
   useEffect(() => {
-    fetch("/api/notes").then(
+    fetch("http://server-production-e885.up.railway.app/api/notes").then(
       response => response.json()
     ).then(
       data =>
