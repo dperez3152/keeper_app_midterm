@@ -73,7 +73,6 @@ function App() {
         setNotes((prevNotes) => {
           return [...prevNotes, { _id: data.insertedId, title: inputTitle, content: inputContent}];
         });
-        //setNames(prevNames => [...prevNames, { _id: data.insertedId, name: newName }]);
       })
       .catch(error => console.error(error));
 
@@ -81,7 +80,7 @@ function App() {
       setInputContent("");
   };
 
-  function addNotePrev(event) {
+ /* function addNotePrev(event) {
     event.preventDefault();
 
     const newNote = {
@@ -94,38 +93,38 @@ function App() {
     });
     setInputTitle("");
     setInputContent("");
-  }
-
-  /*const handleAddNote = async (
-    try {
-      const response = await fetch("/api/notes",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            title,
-            content,
-          }),
-        }
-      );
-
-      const newNote = await response.json();
-
-      setNotes([newNote, ...notes]);
-      setTitle("");
-      setContent("");
-    } catch (e) {
-      console.log(e);
-    }
-  };*/
+  }*/
 
 
-  const deleteNote = (id) => {
+  const deleteNotePrev = (id) => {
     setNotes((prevNotes) => {
       return prevNotes.filter((note) => note.key != id);
     });
+  };
+
+  const deleteNote = (noteId) => {
+    // Make a DELETE request to the API endpoint for deleting a note
+    fetch(`/api/notes/${noteId}`, {
+      method: 'DELETE',
+      credentials: 'include',  // Include credentials if needed
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Assuming data contains information about the deleted note, if needed
+        console.log('Note deleted:', data);
+  
+        // Update the state to remove the deleted note
+        setNotes(prevNotes => prevNotes.filter(note => note._id !== noteId));
+      })
+      .catch(error => console.error('Error deleting note:', error));
   };
 
   return (
