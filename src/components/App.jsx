@@ -102,7 +102,7 @@ function App() {
     });
   };
 
-  const deleteNote = (noteId) => {
+  const deleteNote = (_id) => {
     // Make a DELETE request to the API endpoint for deleting a note
     fetch(`/api/notes/${noteId}`, {
       method: 'DELETE',
