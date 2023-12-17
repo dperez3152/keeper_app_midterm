@@ -2,40 +2,22 @@ import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
-import notes from "../notes";
 
 function App() {
   const [inputTitle, setInputTitle] = useState("");
   const [inputContent, setInputContent] = useState("");
   const [note, setNotes] = useState([]);
 
-  /*useEffect(() => {
-    const fetchNotes = async () => {
-      try {
-        const response = await fetch("/api/notes");
-
-        const notesReceived = await response.json();
-
-        setNotes(notesReceived);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-
-    fetchNotes();
-  }, []);*/
-
   useEffect(() => {
-    fetch("https://server-production-e885.up.railway.app/api/notes", {
+    fetch(`https://server-production-e885.up.railway.app/api/notes`, {
       method: 'GET',
-      credentials: 'include',  // Include credentials in the request
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
     }).then(
       response => response.json()
     ).then(data => {
-      console.log(data);
       setNotes(data);
     })
      .catch(error => {
@@ -55,7 +37,7 @@ function App() {
 
   function addNote(event) {
     event.preventDefault();
-    // Add a new entry
+
     fetch(`https://server-production-e885.up.railway.app/api/notes`, {
       method: 'POST',
       headers: {
@@ -80,35 +62,11 @@ function App() {
       setInputContent("");
   };
 
- /* function addNotePrev(event) {
-    event.preventDefault();
-
-    const newNote = {
-      key: note.length + 1,
-      title: inputTitle,
-      content: inputContent
-    };
-    setNotes((prevNotes) => {
-      return [...prevNotes, newNote];
-    });
-    setInputTitle("");
-    setInputContent("");
-  }*/
-
-
-  const deleteNotePrev = (id) => {
-    setNotes((prevNotes) => {
-      return prevNotes.filter((note) => note.key != id);
-    });
-  };
-
   const deleteNote = (id) => {
-    // Make a DELETE request to the API endpoint for deleting a note
-    console.log("ID!:", id);
 
     fetch(`https://server-production-e885.up.railway.app/api/notes/${id}`, {
       method: 'DELETE',
-      credentials: 'include',  // Include credentials if needed
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -120,10 +78,6 @@ function App() {
         return response.json();
       })
       .then(data => {
-        // Assuming data contains information about the deleted note, if needed
-        console.log('Note deleted:', data);
-  
-        // Update the state to remove the deleted note
         setNotes(prevNotes => prevNotes.filter(note => note._id !== id));
       })
       .catch(error => console.error('Error deleting note:', error));
