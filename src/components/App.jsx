@@ -154,6 +154,7 @@ function App() {
         <Note
           //key={n.key}
           //id={n.key}
+          _id={n._id}
           title={n.title}
           content={n.content}
           deleteNote={deleteNote}
