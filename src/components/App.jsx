@@ -61,7 +61,7 @@ function App() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ title: {inputTitle}, content: {inputContent} }),
+      body: JSON.stringify({ title: inputTitle, content: inputContent }),
     })
       .then(response => {
         if (!response.ok) {
