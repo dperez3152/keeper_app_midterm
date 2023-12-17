@@ -29,13 +29,14 @@ function App() {
     fetch("https://server-production-e885.up.railway.app/api/notes", {
       method: 'GET',
       credentials: 'include',  // Include credentials in the request
+      headers: {
+        'Content-Type': 'application/json',
+      },
     }).then(
       response => response.json()
-    ).then(
-      data =>
-        setNotes(data)
-    )
-    .catch(error => {
+    ).then(data => console.log(data))
+     .then(data => setNotes(data))
+     .catch(error => {
       console.error("Error fetching data:", error)
     });
   }, [])
