@@ -71,7 +71,7 @@ function App() {
       })
       .then(data => {
         setNotes((prevNotes) => {
-          [...prevNotes, { _id: data.insertedId, title: {inputTitle}, content: {inputContent}}];
+          return [...prevNotes, { _id: data.insertedId, title: {inputTitle}, content: {inputContent}}];
         });
         //setNames(prevNames => [...prevNames, { _id: data.insertedId, name: newName }]);
       })
