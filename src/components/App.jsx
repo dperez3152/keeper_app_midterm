@@ -106,7 +106,7 @@ function App() {
     // Make a DELETE request to the API endpoint for deleting a note
     console.log("ID!:", id);
 
-    fetch(`/api/notes/${id}`, {
+    fetch("https://server-production-e885.up.railway.app/api/notes/${id}", {
       method: 'DELETE',
       credentials: 'include',  // Include credentials if needed
       headers: {
