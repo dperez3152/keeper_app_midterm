@@ -104,7 +104,7 @@ function App() {
 
   const deleteNote = (_id) => {
     // Make a DELETE request to the API endpoint for deleting a note
-    fetch(`/api/notes/${noteId}`, {
+    fetch(`/api/notes/${_id}`, {
       method: 'DELETE',
       credentials: 'include',  // Include credentials if needed
       headers: {
@@ -122,7 +122,7 @@ function App() {
         console.log('Note deleted:', data);
   
         // Update the state to remove the deleted note
-        setNotes(prevNotes => prevNotes.filter(note => note._id !== noteId));
+        setNotes(prevNotes => prevNotes.filter(note => note._id !== _id));
       })
       .catch(error => console.error('Error deleting note:', error));
   };
