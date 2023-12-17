@@ -56,7 +56,7 @@ function App() {
   function addNote(event) {
     event.preventDefault();
     // Add a new entry
-    fetch("https://server-production-e885.up.railway.app/api/notes", {
+    fetch(`https://server-production-e885.up.railway.app/api/notes`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
