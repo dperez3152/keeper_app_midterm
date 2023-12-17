@@ -157,7 +157,8 @@ function App() {
           _id={n._id}
           title={n.title}
           content={n.content}
-          deleteNote={deleteNote}
+          deleteNote={() => deleteNote(n._id)}
+          //deleteNote={deleteNote}
         />
       ))}
       <Footer />
