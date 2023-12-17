@@ -55,6 +55,34 @@ function App() {
 
   function addNote(event) {
     event.preventDefault();
+    // Add a new entry
+    fetch('/api/notes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ title: {inputTitle}, content: {inputContent} }),
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP Error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        setNotes((prevNotes) => {
+          [...prevNotes, { _id: data.insertedId, title: {inputTitle}, content: {inputContent}}];
+        });
+        //setNames(prevNames => [...prevNames, { _id: data.insertedId, name: newName }]);
+      })
+      .catch(error => console.error(error));
+
+      setInputTitle("");
+      setInputContent("");
+  };
+
+  function addNotePrev(event) {
+    event.preventDefault();
 
     const newNote = {
       key: note.length + 1,
