@@ -34,10 +34,12 @@ function App() {
       },
     }).then(
       response => response.json()
-    ).then(data => console.log(data))
-     .then(data => setNotes(data))
+    ).then(data => {
+      console.log(data);
+      setNotes(data);
+    })
      .catch(error => {
-      console.error("Error fetching data:", error)
+      console.error("Error fetching data:", error);
     });
   }, [])
 
@@ -123,8 +125,8 @@ function App() {
 
       {note.map((n) => (
         <Note
-          key={n.key}
-          id={n.key}
+          //key={n.key}
+          //id={n.key}
           title={n.title}
           content={n.content}
           deleteNote={deleteNote}
