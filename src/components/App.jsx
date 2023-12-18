@@ -108,13 +108,10 @@ function App() {
 
       {note.map((n) => (
         <Note
-          //key={n.key}
-          //id={n.key}
           _id={n._id}
           title={n.title}
           content={n.content}
           deleteNote={() => deleteNote(n._id)}
-          //deleteNote={deleteNote}
         />
       ))}
       <Footer />
